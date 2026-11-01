@@ -1,0 +1,23 @@
+<!doctype html>
+<html lang="es">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="style.css" />
+    <title>Lista de tareas</title>
+  </head>
+  <body>
+    <main>
+      <h1>Lista de tareas</h1>
+      <form id="formularioTarea">
+        <label for="tarea">¿Qué deseas realizar?</label>
+        <input type="text" id="tarea" required placeholder="Hacer ejercicio" />
+        <button type="submit">Registrar</button>
+      </form>
+      <p id="mensajes"></p>
+
+      <ol id="listaTarea"></ol>
+    </main>
+    <script src="index.js"></script>
+  </body>
+</html>
