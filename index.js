@@ -19,6 +19,11 @@ function agregarTarea(e) {
     const borrarTarea = document.createElement("button");
     borrarTarea.type = "button";
     borrarTarea.textContent = "Borrar";
+    borrarTarea.addEventListener("click", borrarBoton);
+    borrarTarea.setAttribute(
+      "aria-label",
+      `Borrar la tarea ${validarEspacios}`,
+    );
     crearTarea.append(borrarTarea);
     listaUsuario.append(crearTarea);
     inputUsuario.value = "";
@@ -28,4 +33,9 @@ function agregarTarea(e) {
 
 function tacharTarea(e) {
   e.currentTarget.classList.toggle("hecha");
+}
+
+function borrarBoton(e) {
+  e.stopPropagation();
+  e.currentTarget.parentElement.remove();
 }
