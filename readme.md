@@ -1,17 +1,5 @@
 <div align="center">
 
-![header](https://capsule-render.vercel.app/api?type=waving&color=gradient&height=140&section=header&text=Lista%20de%20tareas&fontSize=40&fontColor=ffffff)
-
-### ✅ Anota tus tareas y no las pierdas al recargar ✅
-
-Agrega, tacha y borra tareas. Todo queda guardado en tu navegador 📝
-
-![HTML5](https://img.shields.io/badge/HTML5-E34F26?style=for-the-badge&logo=html5&logoColor=white)
-![CSS3](https://img.shields.io/badge/CSS3-1572B6?style=for-the-badge&logo=css3&logoColor=white)
-![JavaScript](https://img.shields.io/badge/JavaScript-F7DF1E?style=for-the-badge&logo=javascript&logoColor=black)
-
-</div>
-
 <div align="center">
   <img src="./assets/demo.gif" alt="Demostración de la lista de tareas agregando, tachando y borrando tareas" width="400" />
 </div>
@@ -43,11 +31,11 @@ Agrega, tacha y borra tareas. Todo queda guardado en tu navegador 📝
 
 1. Clona el repositorio:
    ```bash
-   git clone https://github.com/Michael-SCS/[nombre-del-repo].git
+   git clone https://github.com/Michael-SCS/toDo-List.git
    ```
 2. Entra a la carpeta:
    ```bash
-   cd [nombre-del-repo]
+   cd toDo-List
    ```
 3. Abre `index.html` en tu navegador 🎉
 
@@ -76,21 +64,9 @@ Cada vez que algo cambia (agregar, tachar o borrar), el programa actualiza el ar
 
 ## 💡 Lo que aprendí
 
-- 🔎 [Por qué las tareas viven en un array y la pantalla solo las dibuja]
-- 💾 [Para qué sirven `JSON.stringify` y `JSON.parse` con `localStorage`]
-- 🖱️ [Qué hace `e.stopPropagation()` y por qué hizo falta en el botón de borrar]
-- 🐛 [Qué error te costó más y cómo lo resolviste]
+- 🔎 Array y pantalla: Aprendí que los datos deben vivir en un array y que la pantalla solo los dibuja. Cuando algo cambia, primero se actualiza el array y después se redibuja todo.
+- 🐛 El error que más me costó: problemas al cruzar los nombres, el for aveces no corria y quedaba en bucle, y cuando no llamaba bien las funciones y la lista salía vacía al recargar
 
 ## 👩‍💻 Autor
 
 <div align="center">
-
-**Michael Castillo**
-
-[![GitHub](https://img.shields.io/badge/GitHub-181717?style=for-the-badge&logo=github&logoColor=white)](https://github.com/Michael-SCS)
-[![LinkedIn](https://img.shields.io/badge/LinkedIn-0A66C2?style=for-the-badge&logo=linkedin&logoColor=white)](https://www.linkedin.com/in/mscastillosaldarriaga/)
-[![Correo](https://img.shields.io/badge/Correo-EA4335?style=for-the-badge&logo=gmail&logoColor=white)](mailto:michaelsteven3211@gmail.com)
-
-Hecho con 💜 y mucho café frío
-
-</div>
