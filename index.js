@@ -2,10 +2,18 @@ const formulario = document.getElementById("formularioTarea");
 const inputUsuario = document.getElementById("tarea");
 const listaUsuario = document.getElementById("listaTarea");
 const alertaEspacioVacio = document.getElementById("mensajes");
-const guardado = localStorage.getItem("tareas");
-const tareas = guardado ? JSON.parse(guardado) : [];
+
+// Recupera las tareas guardadas para conservarlas al recargar la página.
+const tareasGuardadas = localStorage.getItem("tareas");
+const tareas = tareasGuardadas ? JSON.parse(tareasGuardadas) : [];
 formulario.addEventListener("submit", agregarTarea);
 
+// Centraliza el guardado de las tareas en localStorage.
+function guardarTareas() {
+  localStorage.setItem("tareas", JSON.stringify(tareas));
+}
+
+// Valida y agrega una nueva tarea.
 function agregarTarea(e) {
   e.preventDefault();
 
@@ -14,28 +22,42 @@ function agregarTarea(e) {
     alertaEspacioVacio.textContent = "Escribe una tarea antes de registrar.";
   } else {
     alertaEspacioVacio.textContent = "";
-    tareas.push(textoTarea); // 1. anotar en el cuaderno
-    localStorage.setItem("tareas", JSON.stringify(tareas));
-    mostrarTareas(); // 2. copiar el cuaderno a la pizarra
-    inputUsuario.value = ""; // 3. limpiar el campo
+    tareas.push({ texto: textoTarea, hecha: false });
+    guardarTareas();
+    mostrarTareas();
+    inputUsuario.value = "";
   }
 }
 
+// Dibuja la lista y conecta las acciones de cada tarea.
 function mostrarTareas() {
   listaUsuario.replaceChildren();
   for (const tarea of tareas) {
     const li = document.createElement("li");
-    li.textContent = tarea;
+    li.textContent = tarea.texto;
+    const boton = document.createElement("button");
+    boton.type = "button";
+    boton.textContent = "Borrar";
+    boton.setAttribute("aria-label", `Borrar la tarea ${tarea.texto}`);
+    boton.addEventListener("click", function (e) {
+      e.stopPropagation(); // Evita que el clic también marque la tarea.
+      const posicion = tareas.indexOf(tarea);
+      tareas.splice(posicion, 1);
+      guardarTareas();
+      mostrarTareas();
+    });
+    li.append(boton);
     listaUsuario.append(li);
+    if (tarea.hecha) {
+      li.classList.add("hecha");
+    }
+    li.addEventListener("click", function () {
+      tarea.hecha = !tarea.hecha; // Alterna el estado completado.
+      guardarTareas();
+      mostrarTareas();
+    });
   }
 }
 
-function tacharTarea(e) {
-  e.currentTarget.classList.toggle("hecha");
-}
-
-function borrarBoton(e) {
-  e.stopPropagation();
-  e.currentTarget.parentElement.remove();
-}
+// Muestra las tareas guardadas al cargar la página.
 mostrarTareas();
