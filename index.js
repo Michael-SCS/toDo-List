@@ -2,32 +2,31 @@ const formulario = document.getElementById("formularioTarea");
 const inputUsuario = document.getElementById("tarea");
 const listaUsuario = document.getElementById("listaTarea");
 const alertaEspacioVacio = document.getElementById("mensajes");
-
+const guardado = localStorage.getItem("tareas");
+const tareas = guardado ? JSON.parse(guardado) : [];
 formulario.addEventListener("submit", agregarTarea);
 
 function agregarTarea(e) {
-  e.preventDefault(); //Evita que la página se recargue al enviar el formulario
+  e.preventDefault();
 
-  const validarEspacios = inputUsuario.value.trim(); //Quita los espacios al inicio o final innecesarios
-  if (validarEspacios === "") {
-    //Valida que no se ingresen solo espacios
+  const textoTarea = inputUsuario.value.trim();
+  if (textoTarea === "") {
     alertaEspacioVacio.textContent = "Escribe una tarea antes de registrar.";
   } else {
-    const crearTarea = document.createElement("li");
-    alertaEspacioVacio.textContent = ""; //Borra el mensaje una vez se agrega
-    crearTarea.textContent = validarEspacios;
-    const borrarTarea = document.createElement("button");
-    borrarTarea.type = "button";
-    borrarTarea.textContent = "Borrar";
-    borrarTarea.addEventListener("click", borrarBoton);
-    borrarTarea.setAttribute(
-      "aria-label",
-      `Borrar la tarea ${validarEspacios}`,
-    );
-    crearTarea.append(borrarTarea);
-    listaUsuario.append(crearTarea);
-    inputUsuario.value = "";
-    crearTarea.addEventListener("click", tacharTarea); //Al Li creado de le puede tachar
+    alertaEspacioVacio.textContent = "";
+    tareas.push(textoTarea); // 1. anotar en el cuaderno
+    localStorage.setItem("tareas", JSON.stringify(tareas));
+    mostrarTareas(); // 2. copiar el cuaderno a la pizarra
+    inputUsuario.value = ""; // 3. limpiar el campo
+  }
+}
+
+function mostrarTareas() {
+  listaUsuario.replaceChildren();
+  for (const tarea of tareas) {
+    const li = document.createElement("li");
+    li.textContent = tarea;
+    listaUsuario.append(li);
   }
 }
 
@@ -39,3 +38,4 @@ function borrarBoton(e) {
   e.stopPropagation();
   e.currentTarget.parentElement.remove();
 }
+mostrarTareas();
